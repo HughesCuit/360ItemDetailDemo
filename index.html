@@ -13,14 +13,14 @@
 					let x = Math.abs(ev.distance);
 					
 					var newidx = Math.floor((x/20 + imageIndex)%37)+1;
-					image.src = './img_'+newidx+'.jpg';
+					image.src = './img_'+newidx+'.JPG';
 					
 				});
 				hammertime.on('panright', function(ev) {
 					let x = Math.abs(ev.distance);
 					
 					var newidx = Math.floor((x/20 - imageIndex)%37)+1;
-					image.src = './img_'+newidx+'.jpg';
+					image.src = './img_'+newidx+'.JPG';
 				});
 			}
 		</script>
