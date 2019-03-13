@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js" charset="utf-8" /></script>
+		<script>
+			window.onload = function () {
+				const app = document.getElementById('app');
+				const hammertime = new Hammer(app);
+				const image = document.getElementById('image');
+				const imageIndex = image.src.split('_').pop().split('.')[0];
+				hammertime.on('panleft', function(ev) {
+					let x = Math.abs(ev.distance);
+					
+					var newidx = Math.floor((x/20 + imageIndex)%37)+1;
+					image.src = './img_'+newidx+'.jpg';
+					
+				});
+				hammertime.on('panright', function(ev) {
+					let x = Math.abs(ev.distance);
+					
+					var newidx = Math.floor((x/20 - imageIndex)%37)+1;
+					image.src = './img_'+newidx+'.jpg';
+				});
+			}
+		</script>
+		<title></title>
+		
+	</head>
+	<body>
+		<div id="app" style="width:100%"> <img id="image" src="./img_1.jpg" alt="" style="width:100%"> </div>
+	</body>
+</html>
