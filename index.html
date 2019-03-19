@@ -78,11 +78,14 @@
 		<title></title>
 		<style>
 			*{ padding:0; margin:0}
-			body,html{ height:100%;}
+			body,html{ width:100%;height:100%;}
+			body {
+				box-sizing: content-box !important;
+			}
 		</style>
 	</head>
 	<body>
-	<div id='loading' class='loader loader3' le style="z-index: 1; position: relative; width: 200px; height: 200px; margin-right: auto;margin-left: auto;">
+	<div id='loading' class='loader loader3' style="z-index: 1; position: relative; width: 200px; height: 200px;">
 		<div>
 			<div>
 				<div>
@@ -95,6 +98,8 @@
 			</div>
 		</div>
 	</div>
-		<div id="app" style="width:80%; height: 100%; margin-left: auto; margin-right: auto"> <img id="image" draggable="false" src="https://hughescuit.github.io/360ItemDetailDemo/img_24.JPG" alt="" style="width:100%; margin-left: auto; margin-right: auto;object-fit: contain;"> </div>
+		<div id="app" style="height: 100%;text-align: center;"> 
+			<img id="image" draggable="false" src="https://hughescuit.github.io/360ItemDetailDemo/img_24.JPG" alt="" style="object-fit: contain;height: 100%;">
+		</div>
 	</body>
 </html>
