@@ -4,11 +4,10 @@
 		<meta charset="UTF-8">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js" charset="utf-8" /></script>
 		<link rel="stylesheet" media="all" href="./loading.css">
-		<script>
-			const image_count = 37;
-		</script>
+
 		<script>
 			window.onload = function () {
+				const image_count = 37;
 				for (var i = 1; i <= image_count; i++) {
 					document.getElementsByTagName("body")[0].innerHTML += "<img src=" + "'https://hughescuit.github.io/360ItemDetailDemo/img_" + i + ".JPG'"+" style='display: none'>"
 				}
@@ -17,19 +16,62 @@
 				const app = document.getElementById('app');
 				const hammertime = new Hammer(app);
 				const image = document.getElementById('image');
-				const imageIndex = image.src.split('_').pop().split('.')[0];
+				var preIndex = parseInt(image.src.split('_').pop().split('.')[0]);
+				var preDistance = 0;
+				
 				hammertime.on('panleft', function(ev) {
-					let x = Math.abs(ev.distance);
-					
-					var newidx = Math.floor((x/20 + imageIndex)%image_count)+1;
+					let x = ev.distance;
+					let diff = x - preDistance;
+					if (Math.abs(diff) >= 10) {
+						preDistance = x;
+					}
+					preIndex = parseInt(image.src.split('_').pop().split('.')[0]);
+//					if (Math.floor(x)%10 != 0) {
+//						return
+//					}
+					console.log('distance:' + diff);
+					console.log('preIndex:' + preIndex);
+					console.log('X:   ' + (-parseInt(diff) + parseInt(preIndex)));
+					var deltaIdx = (-Math.abs(parseInt(diff/10)) + parseInt(preIndex));
+					var dx = deltaIdx;
+					while (dx <= 0) {
+						dx += image_count;
+					}
+					var newidx = Math.floor(dx%image_count);
+					while (newidx <= 0) {
+						newidx += image_count;
+					}
+					console.log('newIndex:' + newidx);
 					image.src = 'https://hughescuit.github.io/360ItemDetailDemo/img_'+newidx+'.JPG';
 					
 				});
 				hammertime.on('panright', function(ev) {
-					let x = Math.abs(ev.distance);
-					
-					var newidx = Math.floor((x/20 - imageIndex)%image_count)+1;
+					let x = ev.distance;
+					let diff = x - preDistance;
+					if (Math.abs(diff) >= 10) {
+						preDistance = x;
+					}
+					preIndex = parseInt(image.src.split('_').pop().split('.')[0]);
+//					if (Math.floor(x)%10 != 0) {
+//						return
+//					}
+					console.log('distance:' + diff);
+					console.log('preIndex:' + preIndex);
+					console.log('X:   ' + (-parseInt(diff) + parseInt(preIndex)));
+					var deltaIdx = (Math.abs(parseInt(diff/10)) + parseInt(preIndex));
+					var dx = deltaIdx;
+					while (dx <= 0) {
+						dx += image_count;
+					}
+					var newidx = Math.floor(dx%image_count);
+					while (newidx <= 0) {
+						newidx += image_count;
+					}
+					console.log('newIndex:' + newidx);
 					image.src = 'https://hughescuit.github.io/360ItemDetailDemo/img_'+newidx+'.JPG';
+				});
+				hammertime.on('panend',function(ev) {
+					preDistance = 0;
 				});
 			}
 		</script>
@@ -53,6 +95,6 @@
 			</div>
 		</div>
 	</div>
-		<div id="app" style="width:80%; height: 100%; margin-left: auto; margin-right: auto"> <img id="image" draggable="false" src="https://hughescuit.github.io/360ItemDetailDemo/img_1.JPG" alt="" style="width:100%; margin-left: auto; margin-right: auto;object-fit: contain;"> </div>
+		<div id="app" style="width:80%; height: 100%; margin-left: auto; margin-right: auto"> <img id="image" draggable="false" src="https://hughescuit.github.io/360ItemDetailDemo/img_24.JPG" alt="" style="width:100%; margin-left: auto; margin-right: auto;object-fit: contain;"> </div>
 	</body>
 </html>
